@@ -1,0 +1,21 @@
+html, body {
+    height: 100%;
+    margin: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    background-color: aqua;
+    height: 5%;
+    -webkit-app-region: drag;
+}
+
+.browser {
+    background-color: aliceblue;
+    height: max-content;
+}
