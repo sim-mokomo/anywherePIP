@@ -1,4 +1,5 @@
 html, body {
+    width: 100%;
     height: 100%;
     margin: 0px;
 }
@@ -6,16 +7,68 @@ html, body {
 .content {
     display: flex;
     flex-direction: column;
+    width: 100%;
     height: 100%;
 }
 
 .header {
-    background-color: aqua;
-    height: 5%;
+    /*background-color: aqua;*/
+    width: 100%;
+    height: 40px;
     -webkit-app-region: drag;
+    display: flex;
+    flex-direction: row;
+}
+
+.header > .option {
+    /*background-color: blue;*/
+    height: 40px;
+    display: flex;
+    flex-direction: row;
+    -webkit-app-region: no-drag;
+}
+
+.header > .option > .option-window {
+    display: flex;
+    flex-direction: row;
+}
+
+.header > .option > .option-route-controll {
+    display: flex;
+    flex-direction: row;
+}
+
+.option-window {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.option-route-controll {
+    margin-right: 10px;
+}
+
+.option-icon{
+    padding: 10px 8px;
 }
 
 .browser {
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
     height: max-content;
+}
+
+.option-url {
+    width: 100%;
+    padding-right: 20px;
+}
+
+.option-url-wrapper {
+    display: flex;
+}
+
+.option-url-wrapper input[type="text"] {
+    flex: 1 1 auto;
+}
+
+#close-button {
+    color: mediumvioletred;
 }

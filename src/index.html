@@ -9,11 +9,30 @@
 <body>
     <div class="content">
         <div class="header">
-
+            <div class="option">
+                <div class="option-window">
+                    <div id="close-button" class="option-icon"><i class="fas fa-times"></i></div>
+                    <div id="minimise-button" class="option-icon"><i class="fas fa-window-minimize"></i></div>
+                    <div id="maximise-button" class="option-icon"><i class="fas fa-window-maximize"></i></div>
+                </div>
+                <div class="option-route-controll">
+                    <div class="option-icon"><i class="fas fa-arrow-left"></i></div>
+                    <div class="option-icon"><i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+            <div class="option-url">
+                <div class="option-icon option-url-wrapper">
+                    <input type="text" class="option-input-field" id="search-url-input-field", size="5">
+                    <button type="submit" id="search-url-submit-button">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
         </div>
         <div class="browser">
-
         </div>
     </div>
+    <script> var exports = {}; </script>
+    <script type="text/javascript" src="../src/index-renderer.js"></script>
 </body>
 </html>
