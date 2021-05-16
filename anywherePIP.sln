@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31229.75
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "anywherePIP", "anywherePIP\anywherePIP.csproj", "{E428E473-E23C-43E5-BAA8-436E429A7591}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E428E473-E23C-43E5-BAA8-436E429A7591}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E428E473-E23C-43E5-BAA8-436E429A7591}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E428E473-E23C-43E5-BAA8-436E429A7591}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E428E473-E23C-43E5-BAA8-436E429A7591}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6E4BA655-F555-4721-894D-8E4D40795B9A}
+	EndGlobalSection
+EndGlobal
