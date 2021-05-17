@@ -26,11 +26,12 @@ namespace anywherePIP
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            AllocConsole();
+            new Form1();
+            Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
             Application.Run();
             Application.ApplicationExit += new EventHandler((object sender, EventArgs e) =>
             {
-                FreeConsole();
+                Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
             });
         }
     }

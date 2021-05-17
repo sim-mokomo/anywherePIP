@@ -12,6 +12,8 @@ namespace anywherePIP
 {
     public partial class Form1 : Form
     {
+        private List<Button> buttons = new List<Button>();
+        private List<Window.WindowEntity> windowEntities = new List<Window.WindowEntity>();
         public Form1()
         {
             InitializeComponent();
@@ -31,16 +33,60 @@ namespace anywherePIP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            Refresh();
+            flowLayoutPanel1.Resize += FlowLayoutPanel1_Resize;
         }
 
-        public void AddButton(string title)
+        private void Button_Click(object sender, EventArgs e)
         {
-            Button button = new()
+            Button senderButton = sender as Button;
+            int buttonIndex = buttons.FindIndex(x => x == senderButton);
+            if(buttonIndex < 0)
             {
-                Text = title
-            };
-            Controls.Add(button);
+                return;
+            }
+            var entity = windowEntities[buttonIndex];
+            if (entity.IsTopMost())
+            {
+                entity.ReleaseForground();
+            }
+            else
+            {
+                entity.FixForground();
+            }
+            
+            Refresh();
+        }
+
+        private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
+        {
+            foreach(var button in buttons)
+            {
+                button.Width = ClientRectangle.Width;
+            }
+        }
+
+        public void Refresh()
+        {
+            flowLayoutPanel1.Controls.Clear();
+            buttons.Clear();
+            windowEntities.Clear();
+
+            windowEntities = Window.WindowService
+                .GetWindows()
+                .Where(x => x.IsInTaskBar())
+                .ToList();
+            foreach (var window in windowEntities.Select((x, index) => new { item = x, i = index }))
+            {
+                Button button = new Button();
+                button.Tag = window.i;
+                button.Text = window.item.Title;
+                button.Width = ClientRectangle.Width;
+                button.Click += Button_Click;
+                button.BackColor = window.item.IsTopMost() ? Color.Red : Color.White;
+                buttons.Add(button);
+                flowLayoutPanel1.Controls.Add(button);
+            }
         }
     }
 }

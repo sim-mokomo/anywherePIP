@@ -96,8 +96,40 @@ namespace anywherePIP
             GW_ENABLEDPOPUP = 6,
         }
 
+        public enum SetWindowPosFlags : uint
+        {
+            SWP_ASYNCWINDOWPOS = 0x4000,
+            SWP_DEFERERASE = 0x2000,
+            SWP_DRAWFRAME = 0x0020,
+            SWP_FRAMECHANGED = 0x0020,
+            SWP_HIDEWINDOW = 0x0080,
+            SWP_NOACTIVATE = 0x0010,
+            SWP_NOCOPYBITS = 0x0100,
+            SWP_NOMOVE = 0x0002,
+            SWP_NOOWNERZORDER = 0x0200,
+            SWP_NOREDRAW = 0x0008,
+            SWP_NOREPOSITION = 0x0200,
+            SWP_NOSENDCHANGING = 0x0400,
+            SWP_NOSIZE = 0x0001,
+            SWP_NOZORDER = 0x0004,
+            SWP_SHOWWINDOW = 0x0040,
+        }
+
+
+
+
         public class WindowService
         {
+            /// <summary>
+            /// Places the window above all non-topmost windows. The window maintains its topmost
+            /// position even when it is deactivated.
+            /// </summary>
+            public static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+            /// <summary>
+            /// Places the window above all non-topmost windows (that is, behind all topmost windows).
+            /// This flag has no effect if the window is already a non-topmost window.
+            /// </summary>
+            public static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
             public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lparam);
 
             [DllImport("user32.dll")]
@@ -122,6 +154,16 @@ namespace anywherePIP
             [DllImport("user32.dll")]
             public static extern int GetWindowLong(IntPtr hWnd, WindowLongIndexFlags nIndex);
 
+            [DllImport("user32.dll", SetLastError = true)]
+            public static extern bool SetWindowPos(
+                                        IntPtr hWnd,
+                                        IntPtr hWndInsertAfter,
+                                        int X,
+                                        int Y,
+                                        int cx,
+                                        int cy,
+                                        SetWindowPosFlags uFlags);
+
             public static List<WindowEntity> GetWindows()
             {
                 var windows = new List<WindowEntity>();
@@ -141,6 +183,7 @@ namespace anywherePIP
                             GetWindowLong(hwnd, WindowLongIndexFlags.GWL_STYLE),
                             GetWindowLong(hwnd, WindowLongIndexFlags.GWL_EXSTYLE),
                             windowTitle.ToString());
+                    windows.Add(windowEntity);
                     return true;
                 }), IntPtr.Zero);
 

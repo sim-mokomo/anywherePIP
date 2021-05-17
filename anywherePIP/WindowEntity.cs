@@ -18,6 +18,8 @@ namespace anywherePIP
             private List<WindowStyles> styles;
             private List<WindowStylesEx> exStyles;
 
+            public string Title => title;
+
             public WindowEntity(IntPtr hwnd, int style, int exStyle, string title)
             {
                 this.hwnd = hwnd;
@@ -29,25 +31,39 @@ namespace anywherePIP
                 this.exStyles = BitService.GetFlags<WindowStylesEx>(exStyleRaw);
             }
 
+            public void FixForground()
+            {
+                Window.WindowService.SetWindowPos(hwnd, Window.WindowService.HWND_TOPMOST, 0, 0, 0, 0, SetWindowPosFlags.SWP_NOMOVE | SetWindowPosFlags.SWP_NOSIZE);
+            }
+
+            public void ReleaseForground()
+            {
+                Window.WindowService.SetWindowPos(hwnd, Window.WindowService.HWND_NOTOPMOST, 0, 0, 0, 0, SetWindowPosFlags.SWP_NOMOVE | SetWindowPosFlags.SWP_NOSIZE);
+            }
+
             public bool IsInTaskBar()
             {
-            
-                if(styles.All(x => ((int)x & (int)WindowStyles.WS_VISIBLE) <= 0))
+                if ((styleRaw & (int)WindowStyles.WS_VISIBLE) <= 0)
                 {
                     return false;
                 }
 
-                if (exStyles.Any(x => ((int)x & (int)WindowStylesEx.WS_EX_TOOLWINDOW) != 0))
+                if ((exStyleRaw & (int)WindowStylesEx.WS_EX_TOOLWINDOW) != 0)
                 {
                     return false;
                 }
 
-                if (exStyles.Any(x => ((int)x & (int)WindowStylesEx.WS_EX_NOREDIRECTIONBITMAP) != 0))
+                if ((exStyleRaw & (int)WindowStylesEx.WS_EX_NOREDIRECTIONBITMAP) != 0)
                 {
                     return false;
                 }
 
                 return true;
+            }
+
+            public bool IsTopMost()
+            {
+                return exStyles.Any(x => x == WindowStylesEx.WS_EX_TOPMOST);
             }
 
             public void DisplayToConsole()
