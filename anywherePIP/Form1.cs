@@ -33,7 +33,7 @@ namespace anywherePIP
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Refresh();
+            RefreshView();
             flowLayoutPanel1.Resize += FlowLayoutPanel1_Resize;
         }
 
@@ -55,7 +55,7 @@ namespace anywherePIP
                 entity.FixForground();
             }
             
-            Refresh();
+            RefreshView();
         }
 
         private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
@@ -66,7 +66,7 @@ namespace anywherePIP
             }
         }
 
-        public void Refresh()
+        public void RefreshView()
         {
             flowLayoutPanel1.Controls.Clear();
             buttons.Clear();
