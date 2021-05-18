@@ -10,8 +10,10 @@ namespace anywherePIP
     {
         public static List<T> GetFlags<T>(int flags) where T : struct, Enum
         {
-            return Enum
-                .GetValues<T>()
+            return
+                Enum.GetValues(typeof(T))
+                .OfType<T>()
+                .ToList()
                 .Where(x => (flags & Convert.ToInt64(x)) != 0)
                 .ToList(); ;
         }

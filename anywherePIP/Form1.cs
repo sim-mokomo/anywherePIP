@@ -35,13 +35,17 @@ namespace anywherePIP
         {
             RefreshView();
             flowLayoutPanel1.Resize += FlowLayoutPanel1_Resize;
+            toolStripMenuItem1.Click += (object _s, EventArgs _e) =>
+            {
+                Application.Exit();
+            };
         }
 
         private void Button_Click(object sender, EventArgs e)
         {
             Button senderButton = sender as Button;
             int buttonIndex = buttons.FindIndex(x => x == senderButton);
-            if(buttonIndex < 0)
+            if (buttonIndex < 0)
             {
                 return;
             }
@@ -54,13 +58,13 @@ namespace anywherePIP
             {
                 entity.FixForground();
             }
-            
+
             RefreshView();
         }
 
         private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
         {
-            foreach(var button in buttons)
+            foreach (var button in buttons)
             {
                 button.Width = ClientRectangle.Width;
             }
