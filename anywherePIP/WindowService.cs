@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using anywherePIP.Window;
 
 namespace anywherePIP
 {
@@ -104,9 +100,6 @@ namespace anywherePIP
             SWP_SHOWWINDOW = 0x0040,
         }
 
-
-
-
         public class WindowService
         {
             /// <summary>
@@ -131,7 +124,6 @@ namespace anywherePIP
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
-
             [DllImport("user32.dll")]
             public static extern int GetWindowLong(IntPtr hWnd, WindowLongIndexFlags nIndex);
 
@@ -151,14 +143,12 @@ namespace anywherePIP
 
                 EnumWindows(new EnumWindowsProc((IntPtr hwnd, IntPtr lParam) =>
                 {
-                    int titleLength = GetWindowTextLength(hwnd);
-                    if (titleLength <= 0)
+                    if (GetWindowTextLength(hwnd) <= 0)
                     {
                         return true;
                     }
 
-                    var windowEntity = new WindowEntity(hwnd);
-                    windows.Add(windowEntity);
+                    windows.Add(new WindowEntity(hwnd));
                     return true;
                 }), IntPtr.Zero);
 
