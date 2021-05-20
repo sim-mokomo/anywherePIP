@@ -15,7 +15,7 @@ namespace anywherePIP
             Application.SetCompatibleTextRenderingDefault(false);
             Application.EnableVisualStyles();
             
-            new Form1();
+            new MainForm();
             Application.Run();
             Application.ApplicationExit += new EventHandler((object sender, EventArgs e) =>
            {

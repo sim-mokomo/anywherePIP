@@ -7,11 +7,11 @@ using System.Windows.Forms;
 
 namespace anywherePIP
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         private List<Button> buttons = new List<Button>();
         private List<Window.WindowEntity> windowEntities = new List<Window.WindowEntity>();
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
