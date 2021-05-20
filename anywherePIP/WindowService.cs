@@ -157,13 +157,7 @@ namespace anywherePIP
                         return true;
                     }
 
-                    var windowTitle = new StringBuilder(titleLength + 1);
-                    GetWindowText(hwnd, windowTitle, windowTitle.Capacity);
-                    var windowEntity = new WindowEntity(
-                            hwnd,
-                            GetWindowLong(hwnd, WindowLongIndexFlags.GWL_STYLE),
-                            GetWindowLong(hwnd, WindowLongIndexFlags.GWL_EXSTYLE),
-                            windowTitle.ToString());
+                    var windowEntity = new WindowEntity(hwnd);
                     windows.Add(windowEntity);
                     return true;
                 }), IntPtr.Zero);

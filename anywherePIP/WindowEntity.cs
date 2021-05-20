@@ -20,12 +20,16 @@ namespace anywherePIP
 
             public string Title => title;
 
-            public WindowEntity(IntPtr hwnd, int style, int exStyle, string title)
+            public WindowEntity(IntPtr hwnd)
             {
                 this.hwnd = hwnd;
-                this.styleRaw = style;
-                this.exStyleRaw = exStyle;
-                this.title = title;
+                this.styleRaw = Window.WindowService.GetWindowLong(hwnd, WindowLongIndexFlags.GWL_STYLE);
+                this.exStyleRaw = Window.WindowService.GetWindowLong(hwnd, WindowLongIndexFlags.GWL_EXSTYLE);
+
+                int titleLength = Window.WindowService.GetWindowTextLength(hwnd);
+                var windowTitle = new StringBuilder(titleLength + 1);
+                Window.WindowService.GetWindowText(hwnd, windowTitle, windowTitle.Capacity);
+                this.title = windowTitle.ToString();
 
                 this.styles = BitService.GetFlags<WindowStyles>(styleRaw);
                 this.exStyles = BitService.GetFlags<WindowStylesEx>(exStyleRaw);
