@@ -35,10 +35,6 @@ namespace anywherePIP
         {
             RefreshView();
             flowLayoutPanel1.Resize += FlowLayoutPanel1_Resize;
-            toolStripMenuItem1.Click += (object _s, EventArgs _e) =>
-            {
-                Application.Exit();
-            };
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -105,6 +101,11 @@ namespace anywherePIP
                 entity.ReleaseForground();
             }
             RefreshView();
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
