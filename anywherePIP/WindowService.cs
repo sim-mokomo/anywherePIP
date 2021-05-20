@@ -126,7 +126,7 @@ namespace anywherePIP
             public extern static bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lparam);
 
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern int GetWindowTextLength(IntPtr hWnd);
+            public static extern int GetWindowTextLength(IntPtr hWnd);
 
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);

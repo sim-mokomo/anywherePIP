@@ -92,5 +92,19 @@ namespace anywherePIP
                 flowLayoutPanel1.Controls.Add(button);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RefreshView();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach(var entity in windowEntities)
+            {
+                entity.ReleaseForground();
+            }
+            RefreshView();
+        }
     }
 }
