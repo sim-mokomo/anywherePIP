@@ -10,11 +10,6 @@ namespace anywherePIP
 {
     static class Program
     {
-        [DllImport("kernel32.dll")]
-        private static extern bool AllocConsole();
-
-        [DllImport("kernel32.dll")]
-        private static extern bool FreeConsole();
         /// <summary>
         /// アプリケーションのメイン エントリ ポイントです。
         /// </summary>
@@ -23,16 +18,14 @@ namespace anywherePIP
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
             Application.EnableVisualStyles();
+            
             new Form1();
-            // Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
             Application.Run();
             Application.ApplicationExit += new EventHandler((object sender, EventArgs e) =>
-            {
-                Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
-            });
+           {
+               Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
+           });
         }
     }
-
 }

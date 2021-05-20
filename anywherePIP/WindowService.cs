@@ -85,17 +85,6 @@ namespace anywherePIP
             WS_EX_NOREDIRECTIONBITMAP = 0x00200000,
         }
 
-        public enum GetWindowCommands
-        {
-            GW_HWNDFIRST = 0,
-            GW_HWNDLAST = 1,
-            GW_HWNDNEXT = 2,
-            GW_HWNDPREV = 3,
-            GW_OWNER = 4,
-            GW_CHILD = 5,
-            GW_ENABLEDPOPUP = 6,
-        }
-
         public enum SetWindowPosFlags : uint
         {
             SWP_ASYNCWINDOWPOS = 0x4000,
@@ -142,14 +131,6 @@ namespace anywherePIP
             [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
             public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            private static extern int GetClassName(IntPtr hWnd, StringBuilder lpClassName, int nMaxCount);
-
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern IntPtr GetWindow(IntPtr hWnd, GetWindowCommands wCmd);
-
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-            public static extern bool IsIconic(IntPtr hWnd);
 
             [DllImport("user32.dll")]
             public static extern int GetWindowLong(IntPtr hWnd, WindowLongIndexFlags nIndex);
