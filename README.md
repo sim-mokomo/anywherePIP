@@ -1,5 +1,5 @@
 # anywherePIP
-ブラウザを前面に表示させる
+ブラウザを最前面に表示させる
 
 ![2021-05-20_23h09_37](https://user-images.githubusercontent.com/15795655/118993465-80c22a80-b9c0-11eb-89cc-14905ba093e4.png)
 
