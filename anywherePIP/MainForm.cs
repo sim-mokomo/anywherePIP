@@ -93,6 +93,15 @@ namespace anywherePIP
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            Exit();
+        }
+
+        private void Exit()
+        {
+            foreach(var entity in windowEntities)
+            {
+                entity.ReleaseForground();
+            }
             Application.Exit();
         }
     }

@@ -17,10 +17,6 @@ namespace anywherePIP
             
             new MainForm();
             Application.Run();
-            Application.ApplicationExit += new EventHandler((object sender, EventArgs e) =>
-           {
-               Window.WindowService.GetWindows().ForEach(x => x.ReleaseForground());
-           });
         }
     }
 }
