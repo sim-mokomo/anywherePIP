@@ -11,25 +11,16 @@ namespace anywherePIP
     {
         private List<WindowPIPButton> windowPIPButtons = new List<WindowPIPButton>();
         private List<Window.WindowEntity> windowEntities = new List<Window.WindowEntity>();
+
         public MainForm()
         {
             InitializeComponent();
         }
 
-        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            if (!this.Visible)
-            {
-                this.ShowDialog();
-            }
-
-            Activate();
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void MainForm_Load(object sender, EventArgs e)
         {
             RefreshView();
-            flowLayoutPanel1.Resize += FlowLayoutPanel1_Resize;
+            flowLayoutPanel1.Resize += FlowLayoutPanel_Resize;
         }
 
         private void Button_Click(object sender, EventArgs e)
@@ -53,11 +44,6 @@ namespace anywherePIP
             RefreshView();
         }
 
-        private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
-        {
-            windowPIPButtons.ForEach(x => x.SetWidth(ClientRectangle.Width));
-        }
-
         public void RefreshView()
         {
             flowLayoutPanel1.Controls.Clear();
@@ -77,31 +63,40 @@ namespace anywherePIP
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            RefreshView();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            foreach(var entity in windowEntities)
+            if (!this.Visible)
             {
-                entity.ReleaseForground();
+                this.ShowDialog();
             }
+
+            Activate();
+        }
+
+        private void FlowLayoutPanel_Resize(object sender, EventArgs e)
+        {
+            windowPIPButtons.ForEach(x => x.SetWidth(ClientRectangle.Width));
+        }
+
+        private void RefreshButton_Click(object sender, EventArgs e)
+        {
             RefreshView();
         }
 
-        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        private void AllUnlockButton_Click(object sender, EventArgs e)
+        {
+            windowEntities.ForEach(x => x.ReleaseForground());
+            RefreshView();
+        }
+
+        private void MenuItemExitButton_Click(object sender, EventArgs e)
         {
             Exit();
         }
 
         private void Exit()
         {
-            foreach(var entity in windowEntities)
-            {
-                entity.ReleaseForground();
-            }
+            windowEntities.ForEach(x => x.ReleaseForground());
             Application.Exit();
         }
     }
