@@ -9,7 +9,7 @@ namespace anywherePIP
 {
     public partial class MainForm : Form
     {
-        private List<Button> buttons = new List<Button>();
+        private List<WindowPIPButton> windowPIPButtons = new List<WindowPIPButton>();
         private List<Window.WindowEntity> windowEntities = new List<Window.WindowEntity>();
         public MainForm()
         {
@@ -34,8 +34,8 @@ namespace anywherePIP
 
         private void Button_Click(object sender, EventArgs e)
         {
-            Button senderButton = sender as Button;
-            int buttonIndex = buttons.FindIndex(x => x == senderButton);
+            var senderButton = sender as Button;
+            int buttonIndex = windowPIPButtons.FindIndex(x => x.FormButton == senderButton);
             if (buttonIndex < 0)
             {
                 return;
@@ -55,16 +55,13 @@ namespace anywherePIP
 
         private void FlowLayoutPanel1_Resize(object sender, EventArgs e)
         {
-            foreach (var button in buttons)
-            {
-                button.Width = ClientRectangle.Width;
-            }
+            windowPIPButtons.ForEach(x => x.SetWidth(ClientRectangle.Width));
         }
 
         public void RefreshView()
         {
             flowLayoutPanel1.Controls.Clear();
-            buttons.Clear();
+            windowPIPButtons.Clear();
             windowEntities.Clear();
 
             windowEntities = Window.WindowService
@@ -73,14 +70,10 @@ namespace anywherePIP
                 .ToList();
             foreach (var window in windowEntities.Select((x, index) => new { item = x, i = index }))
             {
-                Button button = new Button();
-                button.Tag = window.i;
-                button.Text = window.item.Title;
-                button.Width = ClientRectangle.Width;
-                button.Click += Button_Click;
-                button.BackColor = window.item.IsTopMost() ? Color.Red : Color.White;
-                buttons.Add(button);
-                flowLayoutPanel1.Controls.Add(button);
+                var button = new WindowPIPButton(window.item.Title, ClientRectangle.Width, Button_Click);
+                button.IsTopMost(window.item.IsTopMost());
+                windowPIPButtons.Add(button);
+                flowLayoutPanel1.Controls.Add(button.FormButton);
             }
         }
 

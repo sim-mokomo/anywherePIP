@@ -57,6 +57,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WindowEntity.cs" />
+    <Compile Include="WindowPIPButton.cs" />
     <Compile Include="WindowService.cs" />
     <Compile Include="WindowsService.cs" />
     <EmbeddedResource Include="MainForm.resx">
