@@ -18,14 +18,12 @@ namespace anywherePIP
 
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            if (this.Visible)
-            {
-                this.Visible = false;
-            }
-            else
+            if (!this.Visible)
             {
                 this.ShowDialog();
             }
+
+            Activate();
         }
 
         private void Form1_Load(object sender, EventArgs e)
