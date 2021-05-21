@@ -102,32 +102,23 @@ namespace anywherePIP
 
         public class WindowService
         {
-            /// <summary>
-            /// Places the window above all non-topmost windows. The window maintains its topmost
-            /// position even when it is deactivated.
-            /// </summary>
             public static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
-            /// <summary>
-            /// Places the window above all non-topmost windows (that is, behind all topmost windows).
-            /// This flag has no effect if the window is already a non-topmost window.
-            /// </summary>
             public static readonly IntPtr HWND_NOTOPMOST = new IntPtr(-2);
             public delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lparam);
 
-            [DllImport("user32.dll")]
-            [return: MarshalAs(UnmanagedType.Bool)]
+            [DllImport(WindowsService.User32DLL)]
             public extern static bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lparam);
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport(WindowsService.User32DLL, CharSet = CharSet.Auto, SetLastError = true)]
             public static extern int GetWindowTextLength(IntPtr hWnd);
 
-            [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+            [DllImport(WindowsService.User32DLL, CharSet = CharSet.Auto, SetLastError = true)]
             public static extern int GetWindowText(IntPtr hWnd, StringBuilder lpString, int nMaxCount);
 
-            [DllImport("user32.dll")]
+            [DllImport(WindowsService.User32DLL)]
             public static extern int GetWindowLong(IntPtr hWnd, WindowLongIndexFlags nIndex);
 
-            [DllImport("user32.dll", SetLastError = true)]
+            [DllImport(WindowsService.User32DLL, SetLastError = true)]
             public static extern bool SetWindowPos(
                                         IntPtr hWnd,
                                         IntPtr hWndInsertAfter,
