@@ -61,6 +61,8 @@ namespace anywherePIP
                 windowPIPButtons.Add(button);
                 flowLayoutPanel1.Controls.Add(button.FormButton);
             }
+
+            updateStartupButtonColor();
         }
 
         private void notifyIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -98,6 +100,36 @@ namespace anywherePIP
         {
             windowEntities.ForEach(x => x.ReleaseForground());
             Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(WindowsService.StartupRegistryKey, true);
+            if(registryKey.GetValue(WindowsService.StartupRegistryValue) == null)
+            {
+                registryKey.SetValue(WindowsService.StartupRegistryValue, WindowsService.ExePath);
+            }
+            else
+            {
+                registryKey.DeleteValue(WindowsService.StartupRegistryValue, false);
+            }
+            registryKey.Close();
+
+            updateStartupButtonColor();
+        }
+
+        private void updateStartupButtonColor()
+        {
+            var registryKey = Microsoft.Win32.Registry.CurrentUser.OpenSubKey(WindowsService.StartupRegistryKey, true);
+            if(registryKey.GetValue(WindowsService.StartupRegistryValue) == null)
+            {
+                button3.BackColor = Color.White;
+            }
+            else
+            {
+                button3.BackColor = Color.Red;
+            }
+            registryKey.Close();
         }
     }
 }
